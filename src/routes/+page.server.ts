@@ -11,7 +11,6 @@ export const actions = {
 	default: async ({ request }) => {
 		const formData = await request.formData();
 		const username = formData.get('username') as string;
-		const userId = (formData.get('userId') ?? '') as string;
 		const topK = formData.get('top-k');
 		const strictUsername = formData.get('strict-username');
 
@@ -22,7 +21,6 @@ export const actions = {
 				success: false,
 				error: message,
 				username,
-				userId,
 				topK,
 				strictUsername
 			};
@@ -34,7 +32,6 @@ export const actions = {
 
 		const body: InferenceRequest = {
 			username: username,
-			user_id: userId.length > 0 ? userId : null,
 			options: {
 				top_k: topK ? parseInt(topK.toString()) : 10,
 				strict_username: strictUsername === 'on' ? true : false

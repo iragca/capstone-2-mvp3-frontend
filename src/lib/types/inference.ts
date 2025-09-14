@@ -5,7 +5,6 @@ interface InferenceOptions {
 
 interface InferenceRequest {
 	username: string;
-	user_id: string | null;
 	options: InferenceOptions;
 }
 
