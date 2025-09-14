@@ -93,10 +93,15 @@ export interface Tweet {
 	 */
 	is_hateful?: HateSpeechClass;
 }
+type ScoredTweet = {
+	node: Tweet;
+	score: number;
+};
+type ScoredTweetList = ArrayLike<ScoredTweet>;
 
 interface Response {
 	success: boolean;
-	data: ArrayLike<{ node: Tweet; score: number }>;
+	data: ScoredTweetList;
 }
 
-export type { InferenceRequest, InferenceOptions, Response };
+export type { InferenceRequest, InferenceOptions, Response, ScoredTweet, ScoredTweetList };
