@@ -9,5 +9,13 @@ interface InferenceRequest {
 	options: InferenceOptions;
 }
 
+interface Node {
+	id: string;
+}
 
-export type { InferenceRequest, InferenceOptions };
+interface Response {
+	success: boolean;
+	data: ArrayLike<{ node: Node; score: number }>;
+}
+
+export type { InferenceRequest, InferenceOptions, Response };

@@ -1,12 +1,12 @@
-<script>
-	import * as d3 from 'd3';
+<script lang="ts">
 	import Inference from './inference/Inference.svelte';
+	import type { Response } from '$lib/types';
 
-	let graph_container;
+	let graph_container: HTMLDivElement;
+	let { data, form } = $props<{ data: any; form: Response }>();
 </script>
 
 <main class="space-y-20 p-8">
-	<!-- Hero -->
 	<section class="hero bg-base-200 min-h-screen flex items-center justify-center">
 		<div class="hero-content flex flex-col md:flex-row gap-12">
 			<div class="max-w-md">
@@ -21,28 +21,23 @@
 				class="flex-1 flex items-center justify-center bg-gray-100 rounded-lg"
 				bind:this={graph_container}
 			>
-				<!-- Placeholder for Hero graph -->
 				<span class="text-gray-400">[ Graph Illustration ]</span>
 			</div>
 		</div>
 	</section>
 
-	<!-- Study Details -->
 	<section class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
 		<div class="space-y-4">
 			<h2 class="text-3xl font-bold">Study Details</h2>
 			<p class="text-gray-600">Some description about the study goes here.</p>
-			<!-- Placeholder chart -->
 			<div class="h-40 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">
 				[ Chart ]
 			</div>
-			<!-- Another block -->
 			<div class="h-24 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">
 				[ Diagram ]
 			</div>
 		</div>
 		<div class="space-y-4">
-			<!-- More placeholder blocks -->
 			<div class="h-32 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">
 				[ Sidebar Content ]
 			</div>
@@ -55,10 +50,26 @@
 	<!-- Inference -->
 	<section class="max-w-4xl mx-auto space-y-8">
 		<h2 class="text-3xl font-bold">Inference</h2>
-		<div class="flex w-full flex-row items-center">
+		<div class="flex w-full flex-row items-top">
 			<Inference />
 			<div class="divider divider-horizontal"></div>
-			<div class="card bg-base-300 rounded-box grid h-20 w-32 place-items-center">content</div>
+			<div class="card bg-base-300 rounded-box grid h-20 w-32 place-items-center">
+				{#if form.success && form.data}
+					<ul>
+						{#each form.data as item}
+							<li class="mb-4 p-2 w-120 border rounded">
+								<p><strong>{item.node.text}</strong></p>
+								<p class="text-sm text-gray-600">Score: {item.score.toFixed(3)}</p>
+								<a class="text-blue-600 underline" href={item.node.status_link} target="_blank">
+									View Tweet
+								</a>
+							</li>
+						{/each}
+					</ul>
+				{:else}
+					<p>No results yet.</p>
+				{/if}
+			</div>
 		</div>
 	</section>
 </main>
