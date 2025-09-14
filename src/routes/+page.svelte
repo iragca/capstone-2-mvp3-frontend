@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Inference from './inference/Inference.svelte';
 	import type { Response } from '$lib/types';
+	import Display from './display/Display.svelte';
 
 	let graph_container: HTMLDivElement;
 	let { data, form } = $props<{ data: any; form: Response }>();
@@ -54,20 +55,8 @@
 			<Inference />
 			<div class="divider divider-horizontal"></div>
 			<div class="card bg-base-300 rounded-box grid h-20 w-32 place-items-center">
-				{#if form.success && form.data}
-					<ul>
-						{#each form.data as item}
-							<li class="mb-4 p-2 w-120 border rounded">
-								<p><strong>{item.node.text}</strong></p>
-								<p class="text-sm text-gray-600">Score: {item.score.toFixed(3)}</p>
-								<a class="text-blue-600 underline" href={item.node.status_link} target="_blank">
-									View Tweet
-								</a>
-							</li>
-						{/each}
-					</ul>
-				{:else}
-					<p>No results yet.</p>
+				{#if form && form.success}
+					<Display tweets={form.data} />
 				{/if}
 			</div>
 		</div>
