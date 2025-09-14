@@ -1,6 +1,7 @@
 import type { PageServerLoad } from './$types';
 import type { Actions } from './$types';
 import type { InferenceRequest } from '$lib/types';
+import { BACKEND_URL } from '$env/static/private';
 import { fail } from '@sveltejs/kit';
 
 export const load = (async () => {
@@ -14,7 +15,7 @@ export const actions = {
 		const topK = formData.get('top-k');
 		const strictUsername = formData.get('strict-username');
 
-		const endpoint = 'http://localhost:8001/inference';
+		const endpoint = `${BACKEND_URL}/inference`;
 
 		function basicError(message: string) {
 			return {
