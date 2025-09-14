@@ -2,7 +2,7 @@
 	<legend class="fieldset-legend">Options</legend>
 	<label class="floating-label mb-2" for="top-k">
 		<span>Top K</span>
-		<input type="number" id="top-k" name="top-k" placeholder="1" min="1" max="30" class="input input-md mb-1" />
+		<input type="number" id="top-k" name="top-k" placeholder="10" min="1" max="30" class="input input-md mb-1" />
 		<p class="label">Top <i>K</i> posts to display.</p>
 	</label>
 

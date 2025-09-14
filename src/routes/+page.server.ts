@@ -24,7 +24,7 @@ export const actions = {
 			username: username,
 			user_id: userId.length > 0 ? userId : null,
 			options: {
-				top_k: topK ? parseInt(topK.toString()) : 5,
+				top_k: topK ? parseInt(topK.toString()) : 10,
 				strict_username: strictUsername === 'on' ? true : false
 			}
 		};
